@@ -139,6 +139,7 @@ def main() -> None:
 
     add_compact_paragraph(
         doc,
+        "本函僅供對帳之用，並非催款。"
         "本公司為核對雙方帳目及確保記錄一致，謹將截至 ____年____月____日 止貴我雙方往來帳項之結餘列示如下，敬請查核。"
         "如與貴司帳冊記錄相符，請於下方「客戶確認」欄簽署及蓋上公司印章（或授權簽章）後，於 ____年____月____日或之前傳真／電郵／郵寄回本司，以便存檔。",
         size_pt=9.5,
@@ -149,6 +150,7 @@ def main() -> None:
     pe.paragraph_format.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
     pe.paragraph_format.line_spacing = 1.08
     re = pe.add_run(
+        "This letter is for reconciliation purposes only and does not constitute a demand for payment. "
         "For the purpose of reconciling our records, please find below the balance of our account with you as at [date]. "
         "Kindly verify the figures against your books. If the balance agrees with your records, please sign and chop "
         "the confirmation section below and return the same to us by fax / email / post on or before [date]."
