@@ -231,7 +231,8 @@ def main() -> None:
     )
     add_compact_paragraph(
         doc,
-        "1）「視為確認」類條款可能具法律效果，採用前請內部法務／律師審閱。2）聯絡資料僅作對帳用途，並按香港《個人資料（私隱）條例》處理。",
+        "1）本函僅供對帳之用，並非催款；如涉及「視為確認」類條款，仍可能具法律效果，採用前請內部法務／律師審閱。"
+        "2）聯絡資料僅作對帳用途，並按香港《個人資料（私隱）條例》處理。",
         size_pt=8.5,
     )
     pe3 = doc.add_paragraph()
@@ -240,7 +241,8 @@ def main() -> None:
     pe3.paragraph_format.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
     pe3.paragraph_format.line_spacing = 1.08
     re3 = pe3.add_run(
-        "Note: (1) Any “deemed acceptance” or similar wording may have legal effect — obtain internal legal / lawyer "
+        "Note: (1) This letter is for reconciliation purposes only and does not constitute a demand for payment. "
+        "Any “deemed acceptance” or similar wording may nevertheless have legal effect — obtain internal legal / lawyer "
         "review before use. (2) Contact details herein are for reconciliation purposes only and will be handled in "
         "accordance with the Personal Data (Privacy) Ordinance (Cap. 486) of Hong Kong."
     )
