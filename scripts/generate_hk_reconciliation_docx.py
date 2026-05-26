@@ -225,7 +225,7 @@ def main() -> None:
 
     add_compact_paragraph(
         doc,
-        "（可選）法律／私隱提示　(Optional) Legal and Privacy Notice",
+        "（可選）對帳聲明與法律／私隱提示　(Optional) Reconciliation statement and legal / privacy notice",
         bold=True,
         size_pt=9.5,
     )
