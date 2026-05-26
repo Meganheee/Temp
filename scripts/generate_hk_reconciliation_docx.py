@@ -128,7 +128,7 @@ def main() -> None:
         meta.rows[i].cells[1].text = b
         set_cell_shading(meta.rows[i].cells[0], "E7E6E6")
 
-    add_compact_paragraph(doc, "Re: 主旨", bold=True, size_pt=10)
+    add_compact_paragraph(doc, "Re: 主旨　Subject", bold=True, size_pt=10)
     add_compact_paragraph(
         doc,
         "Account Reconciliation as at [日期]　截至[日期]之帳目核對",
@@ -221,7 +221,12 @@ def main() -> None:
         size_pt=8,
     )
 
-    add_compact_paragraph(doc, "（可選）法律／私隱提示　Optional", bold=True, size_pt=9.5)
+    add_compact_paragraph(
+        doc,
+        "（可選）法律／私隱提示　(Optional) Legal and Privacy Notice",
+        bold=True,
+        size_pt=9.5,
+    )
     add_compact_paragraph(
         doc,
         "1）「視為確認」類條款可能具法律效果，採用前請內部法務／律師審閱。2）聯絡資料僅作對帳用途，並按香港《個人資料（私隱）條例》處理。",
