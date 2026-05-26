@@ -232,7 +232,11 @@ def main() -> None:
     pe3.paragraph_format.space_after = Pt(2)
     pe3.paragraph_format.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
     pe3.paragraph_format.line_spacing = 1.08
-    re3 = pe3.add_run("Note: “Deemed acceptance” wording — obtain legal review before use.")
+    re3 = pe3.add_run(
+        "Note: (1) Any “deemed acceptance” or similar wording may have legal effect — obtain internal legal / lawyer "
+        "review before use. (2) Contact details herein are for reconciliation purposes only and will be handled in "
+        "accordance with the Personal Data (Privacy) Ordinance (Cap. 486) of Hong Kong."
+    )
     re3.font.name = "Times New Roman"
     re3.font.size = Pt(8)
     re3.italic = True
