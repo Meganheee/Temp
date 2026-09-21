@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>销售至联营公司顺流交易抵消——会计核算</title>
+<style>
+:root {
+  --navy:#1a365d; --gold:#b8860b; --ink:#1f2933; --muted:#5c6b7a;
+  --paper:#fbf7f0; --card:#fffdf8; --line:#e4d9c5;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; font-family:"Source Han Serif SC","Noto Serif SC","Songti SC","WenQuanYi Micro Hei",serif;
+  color:var(--ink); background:linear-gradient(180deg,#eef2f6 0%, #f7f3ea 220px, var(--paper) 220px);
+  line-height:1.65;
+}
+.wrap { max-width:980px; margin:0 auto; padding:32px 20px 80px; }
+header.hero {
+  background:var(--navy); color:#f8f4ea; padding:36px 32px; border-radius:18px;
+  box-shadow:0 12px 40px rgba(26,54,93,.22);
+}
+header.hero .kicker { letter-spacing:.18em; font-size:12px; color:#e4c56a; }
+header.hero h1 { font-size:30px; margin:10px 0 8px; line-height:1.3; }
+header.hero p { margin:0; color:#d7dee8; font-size:15px; }
+nav.toc {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px;
+  margin:22px 0 28px;
+}
+nav.toc a {
+  display:block; background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:10px 12px; color:var(--navy); text-decoration:none; font-size:13px;
+}
+nav.toc a:hover { border-color:var(--gold); }
+section {
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:22px 24px; margin:0 0 16px;
+}
+h2 { color:var(--navy); font-size:20px; margin:0 0 12px; }
+h3 { color:#2c5282; font-size:16px; margin:18px 0 8px; }
+p { margin:0 0 10px; text-align:justify; }
+table { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0 14px; }
+th { background:var(--navy); color:#fff; padding:8px; text-align:left; font-weight:600; }
+td { border-bottom:1px solid var(--line); padding:8px; vertical-align:top; }
+tr:nth-child(even) td { background:#f7f3ea; }
+pre.entry {
+  background:#1a365d; color:#f6e7c1; padding:12px 14px; border-radius:10px;
+  font-family:ui-monospace,"Sarasa Mono SC",monospace; font-size:13px; overflow:auto;
+  white-space:pre-wrap;
+}
+.formula {
+  background:#fff8e8; border-left:4px solid var(--gold); padding:10px 14px; margin:10px 0;
+  font-family:ui-monospace,monospace; font-size:13px;
+}
+.calc {
+  display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;
+}
+label { display:block; font-size:12px; color:var(--muted); margin:8px 0 4px; }
+input, select {
+  width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px;
+  font-size:14px; background:#fff;
+}
+button {
+  margin-top:14px; background:var(--navy); color:#fff; border:0; border-radius:10px;
+  padding:10px 16px; font-size:14px; cursor:pointer;
+}
+button:hover { background:#234876; }
+#calc-out { background:#1a365d; color:#f6e7c1; min-height:180px; padding:14px; border-radius:10px;
+  white-space:pre-wrap; font-family:ui-monospace,monospace; font-size:13px; }
+.kpi { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; margin:10px 0 14px; }
+.kpi div { background:#f7f3ea; border-radius:10px; padding:10px; }
+.kpi b { display:block; color:var(--navy); font-size:18px; }
+.kpi span { font-size:12px; color:var(--muted); }
+footer { text-align:center; color:var(--muted); font-size:12px; margin-top:24px; }
+@media (max-width:800px) { .calc { grid-template-columns:1fr; } header.hero h1 { font-size:24px; } }
+@media print {
+  body { background:#fff; }
+  .calc-card { break-inside:avoid; }
+  header.hero { box-shadow:none; }
+  nav.toc { display:none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">会计核算技术备忘录　TM-EQ-2026-001</div>
+  <h1>销售至联营公司顺流交易抵消</h1>
+  <p>个别财务报表权益法调整 · 合并财务报表重分类 · 连续编制<br/>
+  CAS 2 / CAS 33 / 会计准则委员会 2023-01-05 问答 / IAS 28　·　2026年9月21日</p>
+</header>
+<nav class="toc">
+  <a href="#s1">1. 事项与原则</a>
+  <a href="#s2">2. 核算路径与公式</a>
+  <a href="#s3">3. 个别报表 / 合并报表</a>
+  <a href="#s4">4. 存货例题</a>
+  <a href="#s5">5. 固定资产</a>
+  <a href="#s6">6. 对照与例外</a>
+  <a href="#s7">7. 在线核算器</a>
+</nav>
+
+<section id="s1">
+<h2>一、事项概述与核心原则</h2>
+<p>投资方向联营企业或合营企业出售资产，称为<strong>顺流交易</strong>。联营、合营企业不纳入合并范围，不能像母子公司那样按 100% 抵销内部收入、成本和存货。投资方法律主体报表已确认全部销售利润，但从“投资方与其联营”这一经济主体看，只有归属于联营<strong>其他股东</strong>的部分真正实现；归属于投资方持股比例的未实现内部交易损益必须递延，待联营企业对外部独立第三方出售、耗用或计提折旧后再确认。</p>
+<table>
+<tr><th>原则</th><th>含义</th></tr>
+<tr><td>只抵自己的那一份</td><td>应抵销金额 = 未实现内部毛利 × 持股比例，不是 100%。</td></tr>
+<tr><td>其他股东份额立即实现</td><td>售给联营，相当于部分售给外部股东，该部分毛利可确认。</td></tr>
+<tr><td>未实现看联营是否出手</td><td>存货对外出售、固定资产折旧后，内部损益才逐步实现。</td></tr>
+<tr><td>个表改投资收益，合表改列报</td><td>个别报表借投资收益、贷长期股权投资；合并报表销售当年重分类收入成本，<strong>不改变净利润</strong>。</td></tr>
+<tr><td>减值与构成业务例外</td><td>减值损失不抵销；构成业务的转让原则上全额确认损益。</td></tr>
+</table>
+<p>准则依据：CAS 2（财会〔2014〕14号）、CAS 33（财会〔2014〕10号）、财政部会计准则委员会 2023-01-05 问答、IAS 28 第 28 段。</p>
+</section>
+
+<section id="s2">
+<h2>二、核算路径与公式</h2>
+<p>① 个别报表按销售准则确认对联营的全部收入、成本、毛利。② 权益法确认应享联营账面净利润份额。③ 按持股比例递延（或转回）未实现内部损益。④ 若需编制合并报表，销售当年把记入投资收益的影响重分类为冲减营业收入与营业成本（或资产处置收益）。</p>
+<div class="formula">未实现内部毛利（存货）＝（售价 − 成本）× 期末未对外部出售比例</div>
+<div class="formula">本期应递延（负数=转回）＝（期末未实现 − 期初未实现）× 持股比例</div>
+<div class="formula">本期投资收益＝联营账面净利润 × 持股比例 − 本期应递延</div>
+<div class="formula">固定资产未实现余额＝内部毛利 − 累计多提折旧；年多提折旧＝内部毛利 / 使用寿命</div>
+</section>
+
+<section id="s3">
+<h2>三、个别报表与合并报表</h2>
+<p>教材典型例：持股 20%，售价 1,000，成本 600，乙年末未售出，乙净利润 2,000（万元）。个别报表投资收益 320.00。</p>
+<pre class="entry">【个别财务报表】按联营企业账面净利润确认权益法投资收益
+  借：长期股权投资——损益调整  400.00
+    贷：投资收益  400.00
+  说明：联营企业账面净利润 2,000.00 × 20.00%</pre>
+<pre class="entry">【个别财务报表】抵销顺流交易未实现损益中归属于投资方的部分
+  借：投资收益  80.00
+    贷：长期股权投资——损益调整  80.00
+  说明：只抵持股比例对应部分，不是全额抵销。</pre>
+<p>合并工作底稿——销售当年无论对外出售多少，分录形式相同；这是重分类，合并净利润不变：</p>
+<pre class="entry">【合并财务报表工作底稿】合并报表：按持股比例重分类顺流收入与成本
+  借：营业收入  200.00
+    贷：营业成本  120.00
+    贷：投资收益  80.00
+  说明：无论联营企业当年对外出售多少，销售当年合并报表均按持股比例全额重分类收入成本；该分录不改变合并净利润，只改变列报项目。个别报表已通过投资收益递延未实现部分。</pre>
+<p>切勿在合并报表再次贷记长期股权投资，否则重复抵销。以后年度一般不再重做收入成本分录。</p>
+</section>
+
+<section id="s4">
+<h2>四、存货例题</h2>
+<div class="kpi">
+  <div><span>全部未售·投资收益</span><b>320.00</b></div>
+  <div><span>外售 70%·投资收益</span><b>376.00</b></div>
+  <div><span>当年售尽·投资收益</span><b>400.00</b></div>
+  <div><span>次年售尽·投资收益</span><b>800.00</b></div>
+</div>
+<table>
+<tr><th>情形</th><th>未实现毛利</th><th>应递延</th><th>个别报表投资收益</th><th>合并重分类</th></tr>
+<tr><td>年末全部未售</td><td>400</td><td>80</td><td>320</td><td>借收入 200 / 贷成本 120、投资收益 80</td></tr>
+<tr><td>对外出售 70%</td><td>120</td><td>24</td><td>376</td><td>分录形式同上</td></tr>
+<tr><td>当年全部外售</td><td>0</td><td>0</td><td>400</td><td>分录形式同上</td></tr>
+<tr><td>次年全部外售（乙净利润 3,600）</td><td>0</td><td>转回 80</td><td>800</td><td>无收入成本分录</td></tr>
+</table>
+<h3>70% 外售时个别报表（合并一笔）</h3>
+<pre class="entry">【个别财务报表】权益法确认投资收益（已扣未实现顺流损益）
+  借：长期股权投资——损益调整  376.00
+    贷：投资收益  376.00
+  说明：联营账面净利润份额 400.00 − 本期未实现变动×持股比例 24.00</pre>
+<h3>次年转回</h3>
+<pre class="entry">【个别财务报表】权益法确认投资收益（已扣未实现顺流损益）
+  借：长期股权投资——损益调整  800.00
+    贷：投资收益  800.00
+  说明：联营账面净利润份额 720.00 − 本期未实现变动×持股比例 -80.00</pre>
+</section>
+
+<section id="s5">
+<h2>五、固定资产顺流交易</h2>
+<p>11 月将成本 600 的商品以 900 售给乙，乙作管理用固定资产，寿命 10 年、残值 0。乙净利润 1,000。内部毛利 300，当年多提折旧 2.5。期末未实现 297.5，应递延 59.5，投资收益 <strong>140.50</strong>。</p>
+<pre class="entry">【个别财务报表】权益法确认投资收益（已扣未实现顺流损益）
+  借：长期股权投资——损益调整  140.50
+    贷：投资收益  140.50
+  说明：联营账面净利润份额 200.00 − 本期未实现变动×持股比例 59.50</pre>
+<pre class="entry">【合并财务报表工作底稿】合并报表：按持股比例重分类顺流处置损益
+  借：营业收入  180.00
+    贷：营业成本  120.00
+    贷：投资收益  60.00
+  说明：若投资方原作为固定资产处置，可将借方改为“资产处置收益”（60.00），不再拆收入成本。</pre>
+<p>若投资方原列报固定资产处置，合并借方改为“资产处置收益”60。次年全年多提折旧 30，转回投资方份额 6，投资收益 = 206；合并报表以后年度不再重分类收入成本。</p>
+</section>
+
+<section id="s6">
+<h2>六、对照、例外与检查清单</h2>
+<table>
+<tr><th>项目</th><th>顺流（售给联营）</th><th>逆流</th><th>售给子公司</th></tr>
+<tr><td>未实现存在于</td><td>联营资产（不进合表）</td><td>投资方资产（进合表）</td><td>购货方资产</td></tr>
+<tr><td>抵销比例</td><td>持股比例</td><td>持股比例</td><td>100%</td></tr>
+<tr><td>合并调整</td><td>借收入 / 贷成本、投资收益</td><td>借长期股权投资 / 贷存货</td><td>借收入 / 贷成本、存货</td></tr>
+</table>
+<p><strong>减值：</strong>售价低于成本且表明资产减值的，损失全额确认，不抵销。<strong>构成业务：</strong>损益原则上全额确认。<strong>超额抵销：</strong>宜将长期股权投资冲至零，超额列报递延收益。<strong>所得税：</strong>借递延所得税资产（应递延 × 税率），贷所得税费用；实现时转回。</p>
+<ul>
+<li>确认对被投资方是重大影响或共同控制（联营/合营），而非控制（子公司）。</li><li>确认交易方向为投资方 → 联营/合营企业（顺流），且交易不构成业务。</li><li>只按持股比例抵销未实现损益，不按 100% 抵销收入成本。</li><li>未实现的判断时点：联营企业是否已对外部独立第三方出售或耗用（含折旧）。</li><li>减值迹象导致的内部交易损失不得抵销。</li><li>个别报表：借投资收益 / 贷长期股权投资——损益调整。</li><li>合并报表（销售当年）：借营业收入 / 贷营业成本、投资收益（重分类，不改变净利润）。</li><li>逆流交易不要套用本套分录：逆流在合并报表应贷存货等资产，同时借长期股权投资。</li>
+</ul>
+<p>常见错误：按 100% 抵联营收入；顺流合表去冲存货；个表已抵后再贷长期股权投资；忘记以后年度转回；固定资产不调折旧；把减值损失递延。</p>
+</section>
+
+<section id="s7" class="calc-card">
+<h2>七、在线核算器</h2>
+<p>输入本企业数据，即时生成个别报表与合并报表分录。单位与输入保持一致。</p>
+<div class="calc">
+  <form id="f">
+    <label>持股比例（如 0.2）</label><input id="ownership" type="number" step="0.01" min="0.01" max="1" value="0.2" />
+    <label>售价</label><input id="price" type="number" step="0.01" value="1000" />
+    <label>成本</label><input id="cost" type="number" step="0.01" value="600" />
+    <label>期末未对外出售比例（存货）</label><input id="remain" type="number" step="0.01" min="0" max="1" value="1" />
+    <label>联营企业账面净利润</label><input id="ni" type="number" step="0.01" value="2000" />
+    <label>资产类型</label>
+    <select id="asset"><option value="inventory">存货</option><option value="ppe">固定资产</option></select>
+    <label>固定资产寿命（年）</label><input id="life" type="number" step="0.5" value="10" />
+    <label>当年使用月数</label><input id="months" type="number" step="1" value="1" />
+    <label>累计使用月数（以后年度）</label><input id="cum" type="number" step="1" value="" placeholder="销售当年可空" />
+    <label>期初未实现毛利（以后年度存货）</label><input id="opening" type="number" step="0.01" value="" placeholder="销售当年为 0" />
+    <label>所得税税率</label><input id="tax" type="number" step="0.01" min="0" max="1" value="0" />
+    <label>期间</label>
+    <select id="period"><option value="sale">销售当年</option><option value="later">以后年度</option></select>
+    <label>例外</label>
+    <select id="exception"><option value="">无</option><option value="impairment">减值损失不抵销</option><option value="business">构成业务，全额确认</option></select>
+    <button type="submit">生成分录</button>
+  </form>
+  <div id="calc-out">填写左侧数据后点击生成分录。</div>
+</div>
+</section>
+<footer>本备忘录供会计核算与合并报表编制使用，不构成审计意见。命令行：python3 scripts/downstream_elimination.py --ownership 0.2 --price 1000 --cost 600 --remain 1 --ni 2000</footer>
+</div>
+<script>
+function r2(v){ return Math.round((Number(v)+Number.EPSILON)*100)/100; }
+function fmt(v){ return r2(v).toLocaleString("zh-CN", {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function compute(p){
+  const own = Number(p.ownership), price = Number(p.price), cost = Number(p.cost);
+  const remain = Number(p.remain), ni = Number(p.ni), tax = Number(p.tax)||0;
+  const saleYear = p.period === "sale";
+  let gp = r2(price - cost);
+  let opening = p.opening === "" || p.opening === null ? (saleYear ? 0 : gp) : Number(p.opening);
+  let unreal = 0, excess = 0;
+  if (p.exception === "business" || p.exception === "impairment") {
+    unreal = 0; opening = 0;
+  } else if (p.asset === "ppe") {
+    const life = Number(p.life)||10;
+    const months = saleYear ? (Number(p.months)||0) : (Number(p.months)||12);
+    let cum = p.cum === "" || p.cum === null ? months : Number(p.cum);
+    const annual = r2(gp / life);
+    excess = r2(annual * (months/12));
+    const cumEx = r2(annual * (cum/12));
+    unreal = r2(Math.max(gp - cumEx, 0));
+    if (p.opening === "" || p.opening === null) {
+      const openEx = r2(Math.max(cumEx - excess, 0));
+      opening = saleYear ? 0 : r2(Math.max(gp - openEx, 0));
+    }
+  } else {
+    unreal = r2(gp * remain);
+    if (p.opening === "" || p.opening === null) opening = saleYear ? 0 : gp;
+  }
+  const investorShare = r2(unreal * own);
+  const periodDef = r2((unreal - opening) * own);
+  const shareNI = r2(ni * own);
+  const ii = r2(shareNI - periodDef);
+  const dtaEnd = tax && investorShare>0 ? r2(investorShare * tax) : 0;
+  const dtaOpen = tax && opening>0 ? r2(r2(opening*own)*tax) : 0;
+  const dtaMove = r2(dtaEnd - dtaOpen);
+  let lines = [];
+  lines.push("毛利 " + fmt(gp) + "　期末未实现 " + fmt(unreal) + "　本期递延（投资方） " + fmt(periodDef));
+  lines.push("联营净利润份额 " + fmt(shareNI) + "　个别报表投资收益 " + fmt(ii));
+  if (excess) lines.push("本期多提折旧 " + fmt(excess));
+  lines.push("");
+  lines.push("【个别财务报表】");
+  if (shareNI) {
+    lines.push("  借：长期股权投资——损益调整  " + fmt(shareNI));
+    lines.push("    贷：投资收益  " + fmt(shareNI));
+  }
+  if (periodDef > 0.005) {
+    lines.push("  借：投资收益  " + fmt(periodDef));
+    lines.push("    贷：长期股权投资——损益调整  " + fmt(periodDef));
+  } else if (periodDef < -0.005) {
+    lines.push("  借：长期股权投资——损益调整  " + fmt(Math.abs(periodDef)));
+    lines.push("    贷：投资收益  " + fmt(Math.abs(periodDef)));
+  }
+  if (dtaMove > 0.005) {
+    lines.push("  借：递延所得税资产  " + fmt(dtaMove));
+    lines.push("    贷：所得税费用  " + fmt(dtaMove));
+  } else if (dtaMove < -0.005) {
+    lines.push("  借：所得税费用  " + fmt(Math.abs(dtaMove)));
+    lines.push("    贷：递延所得税资产  " + fmt(Math.abs(dtaMove)));
+  }
+  lines.push("");
+  lines.push("【合并财务报表工作底稿】");
+  if (saleYear && p.exception === "") {
+    const rev = r2(price*own), cogs = r2(cost*own), plug = r2(rev-cogs);
+    lines.push("  借：营业收入  " + fmt(rev));
+    lines.push("    贷：营业成本  " + fmt(cogs));
+    lines.push("    贷：投资收益  " + fmt(plug));
+    lines.push("  （重分类，不改变合并净利润）");
+  } else {
+    lines.push("  以后年度或例外事项：通常无需收入成本重分类。");
+  }
+  return lines.join("\n");
+}
+document.getElementById("f").addEventListener("submit", function(e){
+  e.preventDefault();
+  const ids = ["ownership","price","cost","remain","ni","asset","life","months","cum","opening","tax","period","exception"];
+  const p = {};
+  ids.forEach(id => p[id] = document.getElementById(id).value);
+  document.getElementById("calc-out").textContent = compute(p);
+});
+</script>
+</body>
+</html>
